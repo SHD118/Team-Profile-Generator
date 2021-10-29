@@ -7,8 +7,10 @@ const Manager = require("./lib/Manager")
 const { messageParent } = require("jest-worker")
 const { data } = require("browserslist")
 const { array } = require("yargs")
+var engineerarr = [];
 var managerArray = []
 var internArray = []
+var employeeArray = []
 var engineerArray = [];
 promptManager()
 
@@ -125,14 +127,22 @@ function selectRole() {
             promptIntern();
         }
         if (data.role === "Finishing building your team") {
-            GenerateHTML(managerArray, engineerArray, internArray);
+            GenerateManager(managerArray);
+            //generate egineer cards
+            GenerateEngineer(engineerArray);
+            GenerateIntern(internArray);
+            //generate intern cards 
+            // send generated value to make html
+            // writeToHTML();
+            console.log(employeeArray);
+
+
         }
      }) 
 }
 
 function GenerateManager(managerArray) {
-   
-    `<div class="card" style="width: 18rem;">
+  temp = `<div class="card" style="width: 18rem;">
     <!-- <img src="..." class="card-img-top" alt="..."> -->
     <div class="card-body">
       <h5 class="card-title">${managerArray.name}</h5>
@@ -147,12 +157,16 @@ function GenerateManager(managerArray) {
       <a href="#" class="card-link">Card link</a>
       <a href="#" class="card-link">Another link</a>
     </div> -->
-  </div>`
+  </div>`;
+  employeeArray.push(temp);
+    
 }
 
 function GenerateIntern(internArray) {
+    
     for (let i = 0; i < internArray.length; i++) {
-        `<div class="card" style="width: 18rem;">
+        var temp =
+            `<div class="card" style="width: 18rem;">
     <!-- <img src="..." class="card-img-top" alt="..."> -->
     <div class="card-body">
       <h5 class="card-title">${managerArray.name}</h5>
@@ -167,13 +181,18 @@ function GenerateIntern(internArray) {
       <a href="#" class="card-link">Card link</a>
       <a href="#" class="card-link">Another link</a>
     </div> -->
-  </div>`
+  </div>`;
+        employeeArray.push(temp);
     }
+    
+    // 
 }
 
 
 function GenerateEngineer(engineerArray) {
+
     for (let i = 0; i < engineerArray.length; i++) {
+        var temp =
         `<div class="card" style="width: 18rem;">
     <!-- <img src="..." class="card-img-top" alt="..."> -->
     <div class="card-body">
@@ -190,17 +209,25 @@ function GenerateEngineer(engineerArray) {
       <a href="#" class="card-link">Another link</a>
     </div> -->
   </div>`
+  employeeArray.push(temp);
     }
+   
 }
 
-const init = () => {
-    promptManager()
-    // Use writeFileSync method to use promises instead of a callback function
-      .then((userInput) => fs.writeFileSync('index1.html', dataForHTML(userInput)))
-      .then(() => console.log('Successfully wrote to README.MD'))
-      .catch((err) => console.error(err));
-  };
+// const init = () => {
+//     promptManager()
+//     // Use writeFileSync method to use promises instead of a callback function
+//     //   .then((userInput) => fs.writeFileSync('index1.html', dataForHTML()))
+//     //   .then(() => console.log('Successfully wrote to README.MD'))
+//     //   .catch((err) => console.error(err));
+//   };
   
-  init();
+//   init();
 
+// function writeToHTML() {
+//     promptManager()
+//     .then((userInput) => fs.writeFileSync('index1.html', dataForHTML()))
+//     .then(() => console.log('Successfully wrote to README.MD'))
+//     .catch((err) => console.error(err));
+//   }
 
