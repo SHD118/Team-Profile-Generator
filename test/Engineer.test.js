@@ -8,8 +8,8 @@ describe("Init Engineer...", () => {
     //     expect(test.name).toEqual("Hiro")
     // })
     it("It should return id properties from Employee", () => {
-        const test = new Employee("Hiro", "github")
-        expect(test.officeNumber).toEqual( "github")
+        const test = new Engineer("Hiro", 2, "email", "github")
+        expect(test.getGithub()).toEqual( "github")
     })
 
 })
